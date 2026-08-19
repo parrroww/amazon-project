@@ -141,8 +141,6 @@ document.querySelectorAll('.js-save-link')
   link.addEventListener('click', () => {
   const productId = link.dataset.productId;
 
-  
-
   const quantityInput = document.querySelector(`.js-quantity-input-${productId}`);
 
   const newQuantity = Number(quantityInput.value); 
