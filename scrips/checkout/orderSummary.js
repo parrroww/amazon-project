@@ -3,8 +3,9 @@ import {products, getProduct} from '../../data/products.js';
 import {formatCurrancy} from "../utils/money.js";
 import {hello} from "https://unpkg.com/supersimpledev@1.0.1/hello.esm.js";
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
-import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js';
+import {deliveryOptions, getDeliveryOption, calculateDeliveryDate} from '../../data/deliveryOptions.js';
 import { renderPeymentSummary } from "./paymentSummary.js"; 
+import { renderCheckoutHeader } from "./checkoutHeader.js";
 
 export function renderOrderSummary(){
 
@@ -19,15 +20,8 @@ cart.forEach((cartItem)=> {
 
  const deliveryOption = getDeliveryOption(deliveryOptionId);
 
- const today = dayjs();
-const deliveryDate = today.add(
-    deliveryOption.deliveryDays,
-    'days'
-);
-const dateString = deliveryDate.format(
-    'dddd, MMMM D'
-);
-  
+ const dateString = calculateDeliveryDate(deliveryOption);
+
  cartSummaryHTML += `
  <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
 <div class="delivery-date">
@@ -79,14 +73,8 @@ const dateString = deliveryDate.format(
 function deliveryOptionsHTML(matchingProduct, cartItem){
     let html = '';
   deliveryOptions.forEach((deliveryOption)=>{
-    const today = dayjs();
-    const deliveryDate = today.add(
-        deliveryOption.deliveryDays,
-        'days'
-    );
-    const dateString = deliveryDate.format(
-        'dddd, MMMM D'
-    );
+    const dateString = calculateDeliveryDate(deliveryOption);
+    
     const priceString = deliveryOption.priceCents === 0
     ?'FREE'
     : `$${formatCurrancy(deliveryOption.priceCents)} -`;
@@ -123,9 +111,9 @@ document.querySelectorAll('.js-delete-link').forEach((link)=>{
   link.addEventListener('click', () => {
   const productId = link.dataset.productId;
   removeFromCart(productId);
-
-  const container = document.querySelector(`.js-cart-item-container-${productId}`);
-  container.remove();
+  
+  renderCheckoutHeader();
+  renderOrderSummary();
   updateCartQuantity();
   renderPeymentSummary();
   });
