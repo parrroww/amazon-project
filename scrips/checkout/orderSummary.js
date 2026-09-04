@@ -12,9 +12,9 @@ export function renderOrderSummary(){
 let cartSummaryHTML = '';
 
 cart.forEach((cartItem)=> {
-  const productId =cartItem.productId;
+ const productId =cartItem.productId;
 
-  const matchingProduct = getProduct(productId);
+ const matchingProduct = getProduct(productId);
 
  const deliveryOptionId = cartItem.deliveryOptionId;
 
@@ -23,7 +23,9 @@ cart.forEach((cartItem)=> {
  const dateString = calculateDeliveryDate(deliveryOption);
 
  cartSummaryHTML += `
- <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
+ <div class="cart-item-container 
+ js-cart-item-container 
+ js-cart-item-container-${matchingProduct.id}">
 <div class="delivery-date">
     Delivery date: ${dateString}
 </div>
@@ -39,7 +41,7 @@ cart.forEach((cartItem)=> {
     <div class="product-price">
         $${formatCurrancy(matchingProduct.priceCents)}
     </div>
-    <div class="product-quantity">
+    <div class="product-quantity js-product-quantity-${matchingProduct.id}">
         <span>
         Quantity: <span class="quantity-label js-quantity-label-${matchingProduct.id}">${cartItem.quantity}</span>
         </span>
@@ -51,7 +53,8 @@ cart.forEach((cartItem)=> {
         <span class="save-quantity-link link-primary js-save-link" data-product-id="${matchingProduct.id}">
         Save
         </span>
-        <span class="delete-quantity-link link-primary js-delete-link"
+        <span class="delete-quantity-link link-primary js-delete-link 
+        js-delete-link-${matchingProduct.id}"
         data-product-id = "${matchingProduct.id}">
         Delete
         </span>
