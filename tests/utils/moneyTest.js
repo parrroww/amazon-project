@@ -10,6 +10,14 @@ describe('test suite: formatCurrancy', ()=>{
   });
 
   it('rounds up to the nearest cent', ()=>{
-    expect(formatCurrancy(2000.5)).toEqual('20.01')
+    expect(formatCurrancy(2000.5)).toEqual('20.01');
+  });
+
+  it('ronds down to the nearest cent', ()=>{
+    expect(formatCurrancy(2000.4)).toEqual('20.00');
+  });
+
+  it('works with negative numbers', ()=>{
+    expect(formatCurrancy(-500)).toEqual('-5.00');
   });
 });
