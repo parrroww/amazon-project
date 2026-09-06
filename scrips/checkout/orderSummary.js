@@ -41,19 +41,30 @@ cart.forEach((cartItem)=> {
     <div class="product-price">
         $${formatCurrancy(matchingProduct.priceCents)}
     </div>
-    <div class="product-quantity js-product-quantity-${matchingProduct.id}">
+    <div class="product-quantity 
+    js-product-quantity-${matchingProduct.id}">
         <span>
-        Quantity: <span class="quantity-label js-quantity-label-${matchingProduct.id}">${cartItem.quantity}</span>
+        Quantity: <span class="quantity-label 
+        js-quantity-label-${matchingProduct.id}">
+        ${cartItem.quantity}
         </span>
-        <span class="update-quantity-link link-primary js-update-link"
+        </span>
+        <span class="update-quantity-link 
+        link-primary 
+        js-update-link"
         data-product-id="${matchingProduct.id}">
         Update
         </span>
-        <input class="quantity-input js-quantity-input-${matchingProduct.id}">
-        <span class="save-quantity-link link-primary js-save-link" data-product-id="${matchingProduct.id}">
+        <input class="quantity-input 
+        js-quantity-input-${matchingProduct.id}">
+        <span class="save-quantity-link 
+        link-primary 
+        js-save-link" data-product-id="${matchingProduct.id}">
         Save
         </span>
-        <span class="delete-quantity-link link-primary js-delete-link 
+        <span class="delete-quantity-link 
+        link-primary 
+        js-delete-link 
         js-delete-link-${matchingProduct.id}"
         data-product-id = "${matchingProduct.id}">
         Delete
